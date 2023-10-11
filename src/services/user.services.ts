@@ -57,8 +57,6 @@ const update = async (
         address: { ...currentAddress },
     });
 
-    console.log(user);
-
     return userReturnSchema.parse(user);
 };
 

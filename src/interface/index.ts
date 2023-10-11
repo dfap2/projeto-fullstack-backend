@@ -5,7 +5,7 @@ import {
     AnouncementReturn,
     AnouncementUpdate,
 } from "./anouncement.interfaces";
-import { ImageCreate } from "./image.interfaces";
+import { ImageCreate, ImageRead, ImageUpdate } from "./image.interfaces";
 import {
     CommentCreate,
     CommentRead,
@@ -23,6 +23,8 @@ export {
     AnouncementReturn,
     AnouncementUpdate,
     ImageCreate,
+    ImageRead,
+    ImageUpdate,
     CommentCreate,
     CommentRead,
     CommentUpdate,

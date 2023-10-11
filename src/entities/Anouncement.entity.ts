@@ -29,7 +29,7 @@ export class Anouncement {
     model: string;
 
     @Column({ type: "date" })
-    year: string;
+    year: Date;
 
     @Column({ type: "enum", enum: FuelType, default: FuelType.GASOLINA })
     fuel: FuelType;
@@ -41,13 +41,13 @@ export class Anouncement {
     price: number;
 
     @CreateDateColumn({ type: "date" })
-    createdAt: string;
+    createdAt: string | Date;
 
     @UpdateDateColumn({ type: "date" })
-    updatedAt: string;
+    updatedAt: string | Date;
 
     @DeleteDateColumn({ type: "date" })
-    deletedAt: string | null;
+    deletedAt: string | Date | null;
 
     @OneToMany(() => Image, (images) => images.anouncement)
     images: [Image];

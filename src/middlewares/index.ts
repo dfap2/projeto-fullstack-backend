@@ -7,6 +7,7 @@ import uniquePhoneNumber from "./uniquePhoneNumber.middleware";
 import userIdExists from "./userIdExists.middleware";
 import accountOwner from "./accountOwner.middleware";
 import commentOwner from "./commentOwner.middleware";
+import isAnouncer from "./isAnouncer.middleware";
 
 export default {
     handleError,
@@ -18,4 +19,5 @@ export default {
     userIdExists,
     accountOwner,
     commentOwner,
+    isAnouncer,
 };

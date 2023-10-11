@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { FuelType } from "../entities";
 import { imageCreateSchema, imageSchema } from "./image.schemas";
-import { commentSchema } from "./comment.schemas";
 
 const anouncementSchema = z.object({
     id: z.number().positive(),
@@ -9,7 +8,7 @@ const anouncementSchema = z.object({
     model: z.string().max(20),
     year: z.string().or(z.date()),
     fuel: z.nativeEnum(FuelType),
-    description: z.string().nullable(),
+    description: z.string(),
     price: z.number().positive(),
     createdAt: z.string().or(z.date()),
     updatedAt: z.string().or(z.date()),
@@ -26,7 +25,6 @@ const anouncementCreateSchema = anouncementSchema
 
 const anouncementReturnSchema = anouncementSchema.extend({
     images: imageSchema.array(),
-    comments: commentSchema.array(),
 });
 
 const anouncementUpdateSchema = anouncementCreateSchema.partial();

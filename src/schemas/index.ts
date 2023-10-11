@@ -15,7 +15,11 @@ import {
     commentReadSchema,
     commentUpdateSchema,
 } from "./comment.schemas";
-import { imageSchema, imageCreateSchema } from "./image.schemas";
+import {
+    imageSchema,
+    imageCreateSchema,
+    ImageReadSchema,
+} from "./image.schemas";
 import {
     anouncementSchema,
     anouncementCreateSchema,
@@ -38,6 +42,7 @@ export {
     anouncementUpdateSchema,
     imageSchema,
     imageCreateSchema,
+    ImageReadSchema,
     commentSchema,
     commentCreateSchema,
     commentReadSchema,

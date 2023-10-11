@@ -7,4 +7,6 @@ const imageSchema = z.object({
 
 const imageCreateSchema = imageSchema.omit({ id: true });
 
-export { imageSchema, imageCreateSchema };
+const ImageReadSchema = imageSchema.array();
+
+export { imageSchema, imageCreateSchema, ImageReadSchema };
