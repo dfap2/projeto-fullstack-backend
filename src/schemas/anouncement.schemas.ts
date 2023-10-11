@@ -6,7 +6,7 @@ const anouncementSchema = z.object({
     id: z.number().positive(),
     brand: z.string().max(20),
     model: z.string().max(20),
-    year: z.string().or(z.date()),
+    year: z.number().positive(),
     fuel: z.nativeEnum(FuelType),
     description: z.string(),
     price: z.number().positive(),
@@ -21,6 +21,9 @@ const anouncementCreateSchema = anouncementSchema
     })
     .omit({
         id: true,
+        createdAt: true,
+        updatedAt: true,
+        deletedAt: true,
     });
 
 const anouncementReturnSchema = anouncementSchema.extend({

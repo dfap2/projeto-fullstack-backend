@@ -21,20 +21,13 @@ const create = async (
             anouncement,
         });
         await imageRepository.save(newImages);
-
-        return newImages;
-    });
-
-    const images: ImageRead = await imageRepository.find({
-        relations: { anouncement: true },
     });
 
     const anouncementReturn: AnouncementReturn = {
         ...anouncement,
-        images,
     };
 
-    return anouncementReturn;
+    return anouncementReturn!;
 };
 
 // const retrieve = async (params: type) => {};

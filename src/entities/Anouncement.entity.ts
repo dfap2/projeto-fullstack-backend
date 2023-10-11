@@ -28,8 +28,8 @@ export class Anouncement {
     @Column({ length: 50 })
     model: string;
 
-    @Column({ type: "date" })
-    year: Date;
+    @Column({ type: "integer" })
+    year: number;
 
     @Column({ type: "enum", enum: FuelType, default: FuelType.GASOLINA })
     fuel: FuelType;

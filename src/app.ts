@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use("/users", userRouter);
 app.use("/login", sessionRouter);
-app.use("/announcements", anouncementRouter);
+app.use("/anouncements", anouncementRouter);
 app.use("/comments", commentRouter);
 
 app.use(middlewares.handleError);
