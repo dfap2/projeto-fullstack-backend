@@ -3,8 +3,8 @@ import { Anouncement } from "./Anouncement.entity";
 
 @Entity("images")
 export class Image {
-    @PrimaryGeneratedColumn("uuid")
-    uuid: string;
+    @PrimaryGeneratedColumn()
+    id: number;
 
     @Column({ length: 255 })
     imageUrl: string;

@@ -1,0 +1,5 @@
+import sessionRouter from "./session.router";
+import userRouter from "./user.router";
+import commentRouter from "./comment.routers";
+
+export { sessionRouter, userRouter, commentRouter };

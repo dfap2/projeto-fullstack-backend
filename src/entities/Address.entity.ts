@@ -9,14 +9,14 @@ import { User } from "./User.entity";
 
 @Entity("addresses")
 export class Address {
-    @PrimaryGeneratedColumn("uuid")
-    uuid: string;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-    @Column({ type: "integer" })
-    zipCode: number;
+    @Column({ length: 8 })
+    zipCode: string;
 
     @Column({ length: 25 })
-    states: string;
+    state: string;
 
     @Column({ length: 40 })
     city: string;
@@ -24,11 +24,11 @@ export class Address {
     @Column({ length: 120 })
     street: string;
 
-    @Column({ type: "integer", nullable: true })
-    number?: number | null;
+    @Column({ type: "integer", nullable: true, default: 0 })
+    number?: number | undefined | null;
 
-    @Column({ type: "char", length: 50, nullable: true })
-    complement?: string | null;
+    @Column({ type: "char", length: 50, nullable: true, default: null })
+    complement?: string | undefined | null;
 
     @OneToOne(() => User, (user) => user.address)
     @JoinColumn()

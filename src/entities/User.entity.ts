@@ -13,6 +13,7 @@ import {
 import { getRounds, hashSync } from "bcryptjs";
 import { Address } from "./Address.entity";
 import { Anouncement } from "./Anouncement.entity";
+import { Comment } from "./Comment.entity";
 
 export enum AccountType {
     ANUNCIANTE = "anunciante",
@@ -21,8 +22,8 @@ export enum AccountType {
 
 @Entity("users")
 export class User {
-    @PrimaryGeneratedColumn("uuid")
-    uuid: string;
+    @PrimaryGeneratedColumn()
+    id: number;
 
     @Column({ length: 120 })
     name: string;
@@ -30,17 +31,17 @@ export class User {
     @Column({ length: 120, unique: true })
     email: string;
 
-    @Column({ length: 255 })
+    @Column({ length: 120 })
     password: string;
 
     @Column({ length: 11, unique: true })
     cpf: string;
 
-    @Column({ type: "integer" })
-    phoneNumber: number;
+    @Column({ length: 11, unique: true })
+    phoneNumber: string;
 
     @Column({ type: "date" })
-    birthDate: string;
+    birthDate: Date;
 
     @Column({ type: "enum", enum: AccountType, default: AccountType.COMPRADOR })
     account: AccountType;
@@ -59,6 +60,9 @@ export class User {
 
     @OneToMany(() => Anouncement, (anouncements) => anouncements.user)
     anouncements: [Anouncement];
+
+    @OneToMany(() => Comment, (comments) => comments.user)
+    comments: [Comment];
 
     @BeforeInsert()
     @BeforeUpdate()

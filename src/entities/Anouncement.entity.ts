@@ -19,8 +19,8 @@ export enum FuelType {
 
 @Entity("anouncements")
 export class Anouncement {
-    @PrimaryGeneratedColumn("uuid")
-    uuid: string;
+    @PrimaryGeneratedColumn()
+    id: number;
 
     @Column({ length: 50 })
     brand: string;
