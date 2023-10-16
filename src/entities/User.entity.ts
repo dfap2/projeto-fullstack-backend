@@ -52,7 +52,7 @@ export class User {
     @UpdateDateColumn({ type: "date" })
     updatedAt: string;
 
-    @DeleteDateColumn({ type: "date" })
+    @DeleteDateColumn({ type: "date", nullable: true, default: null })
     deletedAt: string | null;
 
     @OneToOne(() => Address, (address) => address.user)

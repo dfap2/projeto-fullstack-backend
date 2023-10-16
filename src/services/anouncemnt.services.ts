@@ -5,15 +5,20 @@ import {
     AnouncementUpdate,
     ImageRead,
 } from "../interface";
-import { anouncementRepository, imageRepository } from "../repositories";
+import {
+    anouncementRepository,
+    imageRepository,
+    userRepository,
+} from "../repositories";
 
 const create = async (
-    payload: AnouncementCreate
+    payload: AnouncementCreate,
+    user: User
 ): Promise<AnouncementReturn> => {
     const imagesUrl = payload.images;
 
     const anouncement: Anouncement = anouncementRepository.create(payload);
-    await anouncementRepository.save(anouncement);
+    await anouncementRepository.save({ ...anouncement, user });
 
     imagesUrl.forEach(async (image) => {
         const newImages: Image = imageRepository.create({
@@ -30,43 +35,32 @@ const create = async (
     return anouncementReturn!;
 };
 
-// const retrieve = async (params: type) => {};
+const read = async (): Promise<AnouncementReturn[]> => {
+    const anouncements: AnouncementReturn[] =
+        await anouncementRepository.find();
+
+    return anouncements;
+};
+
+const retrieve = async (user: User): Promise<any> => {
+    const anouncements: AnouncementReturn[] = await anouncementRepository
+        .createQueryBuilder("announcement")
+        .where("announcement.userId = :userId", { userId: user.id })
+        .getMany();
+
+    console.log(anouncements);
+
+    return anouncements;
+};
 
 const update = async (
     payload: AnouncementUpdate,
-    foundAnouncer: User
+    currentAnouncement: Anouncement
 ): Promise<AnouncementReturn> => {
-    const id: number = foundAnouncer.id;
-
-    if (payload.images) {
-        const imagesUrl = payload.images;
-
-        const anouncement: Anouncement = await anouncementRepository.save(
-            payload
-        );
-
-        imagesUrl.forEach(async (image) => {
-            const newImages: Image = await imageRepository.save({
-                ...image,
-                anouncement,
-            });
-
-            return newImages;
-        });
-
-        const images: Image[] = await imageRepository.find({
-            relations: { anouncement: true },
-        });
-
-        const anouncementReturn: AnouncementReturn = {
-            ...anouncement,
-            images,
-        };
-
-        return anouncementReturn;
-    }
-
-    const anouncement: Anouncement = await anouncementRepository.save(payload);
+    const anouncement: Anouncement = await anouncementRepository.save({
+        ...currentAnouncement,
+        ...payload,
+    });
 
     return anouncement;
 };
@@ -75,4 +69,4 @@ const destroy = async (anouncement: Anouncement): Promise<void> => {
     await anouncementRepository.softRemove(anouncement);
 };
 
-export default { create, update, destroy };
+export default { create, read, retrieve, update, destroy };
